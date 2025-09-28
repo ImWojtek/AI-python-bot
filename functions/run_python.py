@@ -32,13 +32,12 @@ def run_python_file(working_directory, file_path, args=[]):
             check=True
         )
 
-        if not result.stdout.strip():
-            print("No output produced")
-            return ""
-        else:
-            print(f"Output of {target_file}:\nSTDOUT:{result.stdout}")
-            print(f"Process exited with code {result.returncode}")
-            return result.stdout
+
+
+        print(f"Output of {target_file}:\nSTDOUT:{result.stdout}")
+        print(f"Process exited with code {result.returncode}")
+        print(f"Process STDERR (if any):\n{result.stderr}")
+        return result.stdout, result.stderr
 
     except (FileNotFoundError, ValueError, PermissionError) as e:
         # Redirect pre-check exceptions as "stderr"
